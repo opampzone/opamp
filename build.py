@@ -44,7 +44,7 @@ def generate_menu():
         for file in files:
             file_name = clean_name(file)
             # Генерируем ссылку на готовую страницу. Путь относительный!
-            file_link = f"content/{cat}/{file}" 
+            file_link = f"/content/{cat}/{file}" 
             menu_html += f'<a href="{file_link}" class="file-item">{file_name}</a>\n'
         
         menu_html += '</div>'
