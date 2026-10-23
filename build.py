@@ -95,8 +95,12 @@ def build():
                     f.write(page_html)
         
         # Копируем картинки, если они есть в папке img
-        if os.path.exists(os.path.join(cat_path, 'img')):
-            shutil.copytree(os.path.join(cat_path, 'img'), os.path.join(output_cat_path, 'img'))
+                # Копируем ВСЕ папки, в названии которых есть слово img (img, img_xxx и т.д.)
+        for item in os.listdir(cat_path):
+            item_path = os.path.join(cat_path, item)
+            if os.path.isdir(item_path) and "img" in item.lower():
+                output_img_path = os.path.join(output_cat_path, item)
+                shutil.copytree(item_path, output_img_path)
 
     # --- ГЕНЕРАЦИЯ ГЛАВНОЙ СТРАНИЦЫ ---
     index_html = template.replace('<!-- MENU_PLACEHOLDER -->', menu_html)
