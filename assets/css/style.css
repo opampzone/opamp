@@ -188,7 +188,6 @@ body {
     max-width: 900px;
     margin: 0 auto;
     width: 100%;
-    min-height: 100%;
 }
 
 .article-container h1, .article-container h2, .article-container h3 {
