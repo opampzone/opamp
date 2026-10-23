@@ -1,0 +1,142 @@
+
+<div class="amp-container">
+  <style>
+    .amp-container {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #333333;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .amp-container * {
+      box-sizing: border-box;
+    }
+    .amp-card {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    }
+    .amp-card h3 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 20px;
+      color: #111111;
+      font-weight: 700;
+    }
+    .amp-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .amp-img-wrapper {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .amp-img-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .amp-text {
+      flex: 1;
+      margin: 0;
+      font-size: 15px;
+      color: #444444;
+    }
+    .amp-text a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .amp-text a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Адаптивность: для экранов шире 600px раскладываем в 2 колонки */
+    @media (min-width: 600px) {
+      .amp-content {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .amp-img-wrapper {
+        flex-shrink: 0;
+        width: 300px;
+      }
+    }
+  </style>
+
+  <!-- Блок 1 -->
+  <div class="amp-card">
+    <h3>Линейность операционных усилителей при больших выходных токах</h3>
+    <div class="amp-content">
+      <div class="amp-img-wrapper">
+        <img src="img_link/1.jpg" alt="Линейность ОУ" width="300">
+      </div>
+      <p class="amp-text">
+        Статья AudioKiller на сайте electroclub.info анализирует нелинейные искажения (THD) операционных усилителей при работе на низкоомную нагрузку и высоких токах. Основной вывод заключается в том, что при снижении глубины обратной связи на высоких частотах собственное выходное сопротивление ОУ вызывает значительные искажения, требуя использования микросхем с низким R<sub>вых</sub> или увеличения сопротивления нагрузки. Читайте подробный анализ на <a href="https://electroclub.info/other/i-out-ou-0/" target="_blank">electroclub.info</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Блок 2 -->
+  <div class="amp-card">
+    <h3>Тестирование ОУ, полоса пропускания и линейность</h3>
+    <div class="amp-content">
+      <div class="amp-img-wrapper">
+        <img src="img_link/2.jpg" alt="Тестирование ОУ" width="300">
+      </div>
+      <p class="amp-text">
+        На форуме ldsound.club представлено масштабное любительское тестирование 122 операционных усилителей для оценки их полосы пропускания и линейности. В ходе эксперимента с использованием осциллографа Philips PM3055 зафиксированы характеристики отечественных и импортных ОУ при усилении до 1000 раз. Подробные результаты замеров читайте на <a href="https://ldsound.club/threads/testirovaniye-operatsionnykh-usilitelei.645/" target="_blank">ldsound.club</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Блок 3 -->
+  <div class="amp-card">
+    <h3>Параметры операционных усилителей. Как измерить и какие возникают сложности?</h3>
+    <div class="amp-content">
+      <div class="amp-img-wrapper">
+        <img src="img_link/3.jpg" alt="Параметры ОУ" width="300">
+      </div>
+      <p class="amp-text">
+        Статья от компании «Миландр» на Хабре предлагает практическое руководство по измерению ключевых параметров операционных усилителей, включая напряжение смещения, коэффициент усиления, CMRR/PSRR и входные токи. В материале детально описаны схемы лабораторных стендов и методы минимизации паразитных наводок и температурного дрейфа. Подробную информацию читайте на <a href="https://habr.com/ru/companies/milandr/articles/573412/" target="_blank">Habr</a>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Блок 4 -->
+  <div class="amp-card">
+    <h3>Измерение основных параметров ОУ</h3>
+    <div class="amp-content">
+      <div class="amp-img-wrapper">
+        <img src="img_link/4.jpg" alt="Измерение параметров ОУ" width="300">
+      </div>
+      <p class="amp-text">
+        Конструкция рассчитана на сдвоенные ОУ и компараторы со стандартной распиновкой и собрана на небольшой макетной плате. В качестве переключателей использованы джамперы. <a href="http://www.diod.club/forum/topic.php?forum=1&topic=33" target="_blank">diod.club</a>.
+      </p>
+    </div>
+  </div>
+  
+  <!-- Блок 5 -->
+  <div class="amp-card">
+    <h3>Измерение шума настольными приборами</h3>
+    <div class="amp-content">
+      <div class="amp-img-wrapper">
+        <img src="img_link/5.jpg" alt="Измерение шума настольными приборами" width="300">
+      </div>
+      <p class="amp-text">
+        Статья посвящена методике точного измерения собственных шумов прецизионных операционных усилителей (на примере микросхем Texas Instruments OPA376 и OPA211), уровень которых часто находится ниже порога чувствительности стандартных измерительных приборов. <a href="https://www.rlocman.ru/review/article.html?di=669205&srsltid=AfmBOorWhRLbmOSRmeyJcKKA_4B-0XrO4mjJYut_STR0Cj6brmDJhEQ-" target="_blank">rlocman.ru</a>.
+      </p>
+    </div>
+  </div>  
+  
+  
+</div>

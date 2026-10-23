@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpAmp-Zone | База знаний</title>
+    <!-- Подключаем внешние стили -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Кнопка-бургер -->
+    <button id="menu-toggle" class="menu-toggle" aria-label="Открыть меню">☰</button>
+    
+    <!-- ВАЖНО: добавлен id="sidebar", чтобы JS мог найти меню -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">OpAmp-Zone</div>
+        <div class="menu-container">
+            <!-- Сюда скрипт build.py вставит аккордеон -->
+            <!-- MENU_PLACEHOLDER -->
+        </div>
+    </aside>
+
+    <main class="content-area">
+        <div class="article-container">
+            <h1>Добро пожаловать в базу знаний</h1>
+            <p>Выберите интересующую вас статью в меню слева.</p>
+            <blockquote>
+                Схему составил и собрал я. Описание доверил ИИ, так красиво я не напишу, да и времени нет. Скажу только, приборчик удобный и функциональный, в магазине выручит.
+            </blockquote>
+        </div>
+    </main>
+
+    <!-- Подключаем внешний скрипт -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

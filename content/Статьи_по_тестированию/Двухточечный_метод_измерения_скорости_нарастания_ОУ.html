@@ -1,0 +1,990 @@
+
+<article style="margin:0; padding:0; background:#f4f6f8; font-family:'Segoe UI', Roboto, Arial, sans-serif; color:#1f2933; line-height:1.65;">
+
+<div style="max-width:960px; margin:0 auto; padding:40px 28px 60px 28px; background:#ffffff; box-shadow:0 2px 18px rgba(0,0,0,0.06);">
+
+  <!-- Заголовок -->
+  <header style="border-bottom:3px solid #2563eb; padding-bottom:18px; margin-bottom:32px;">
+    <h1 style="margin:0 0 8px 0; font-size:28px; color:#1e3a8a; line-height:1.3;">
+      Двухточечный метод измерения скорости нарастания ОУ в режиме автогенерации
+    </h1>
+    <p style="margin:0; font-size:15px; color:#52606d; font-style:italic;">
+      Теория, область применения и интерактивная физическая модель
+    </p>
+  </header>
+
+  <!-- ==================== 1. СУТЬ ==================== -->
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:21px; color:#1e3a8a; margin:0 0 14px 0; padding-left:10px; border-left:4px solid #2563eb;">
+      1. Суть метода
+    </h2>
+
+    <p style="margin:0 0 14px 0;">
+      Скорость нарастания выходного напряжения (Slew Rate,
+      <i style="font-family:Georgia, 'Times New Roman', serif;">SR</i>) — динамический
+      параметр операционного усилителя, определяющий максимальную скорость изменения
+      выходного напряжения при большом входном скачке. В режиме ограничения скорости
+      нарастания
+    </p>
+
+    <div style="text-align:center; margin:22px 0; padding:14px; background:#f1f5f9; border-radius:8px;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.25em;">
+        <i>SR</i>
+        <span style="margin:0 8px;">=</span>
+        <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+          <span style="display:block; padding:2px 12px 3px 12px; border-bottom:1.5px solid currentColor;"><i>I</i><sub style="font-style:normal; font-size:0.7em;">вн</sub></span>
+          <span style="display:block; padding:3px 12px 2px 12px;"><i>C</i><sub style="font-style:normal; font-size:0.7em;">вн</sub></span>
+        </span>
+      </span>
+    </div>
+
+    <p style="margin:0 0 14px 0;">
+      где
+      <i style="font-family:Georgia, serif;">I</i><sub style="font-style:normal;">вн</sub>
+      — ток, заряжающий внутреннюю корректирующую ёмкость
+      <i style="font-family:Georgia, serif;">C</i><sub style="font-style:normal;">вн</sub>,
+      а <i style="font-family:Georgia, serif;">C</i><sub style="font-style:normal;">вн</sub>
+      — внутренняя корректирующая ёмкость ОУ. Обычно
+      <i style="font-family:Georgia, serif;">I</i><sub style="font-style:normal;">вн</sub>
+      — это ток входного дифференциального каскада или его «хвоста». В зависимости
+      от типа ОУ он может составлять от единиц микроампер до десятков миллиампер.
+    </p>
+
+    <div style="background:#fef3c7; border-left:4px solid #f59e0b; padding:14px 18px; border-radius:6px; margin:18px 0;">
+      <strong style="color:#92400e;">Важно не путать</strong>
+      <span style="color:#78350f;">
+        <i style="font-family:Georgia, serif;">I</i><sub style="font-style:normal;">вн</sub>
+        с максимальным выходным током ОУ
+        <i style="font-family:Georgia, serif;">I</i><sub style="font-style:normal;">OM</sub>.
+        Выходной ток короткого замыкания определяется выходным каскадом и может быть
+        на порядки больше тока, перезаряжающего корректирующую ёмкость. Эти токи могут
+        быть связаны общими цепями смещения, но функционально и численно это разные
+        величины.
+      </span>
+    </div>
+
+    <p style="margin:0;">
+      Двухточечный метод позволяет измерить
+      <i style="font-family:Georgia, serif;">SR</i> без внешних времязадающих
+      конденсаторов, переводя ОУ в режим автогенерации.
+    </p>
+  </section>
+
+  <!-- ==================== 2. ИДЕЯ ==================== -->
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:21px; color:#1e3a8a; margin:0 0 14px 0; padding-left:10px; border-left:4px solid #2563eb;">
+      2. Идея автогенераторного метода
+    </h2>
+
+    <p style="margin:0 0 14px 0;">
+      Исследуемый ОУ включается в режиме повторителя в петлю автогенератора с внешним
+      быстродействующим компаратором. Выходное напряжение ОУ перезаряжается между
+      порогами компаратора с постоянной скоростью, равной собственному
+      <i style="font-family:Georgia, serif;">SR</i>:
+    </p>
+
+    <div style="text-align:center; margin:22px 0; padding:14px; background:#f1f5f9; border-radius:8px;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.25em;">
+        <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+          <span style="display:block; padding:2px 8px 3px 8px; border-bottom:1.5px solid currentColor;"><i>dV</i></span>
+          <span style="display:block; padding:3px 8px 2px 8px;"><i>dt</i></span>
+        </span>
+        <span style="margin:0 8px;">=</span>
+        <i>SR</i>
+      </span>
+    </div>
+
+    <p style="margin:0 0 14px 0;">
+      Пусть пороги компаратора равны
+      <i style="font-family:Georgia, serif;">V</i><sub style="font-style:normal;">L</sub>
+      и
+      <i style="font-family:Georgia, serif;">V</i><sub style="font-style:normal;">H</sub>,
+      а
+    </p>
+
+    <div style="text-align:center; margin:16px 0;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.2em;">
+        <i>ΔV</i>
+        <span style="margin:0 8px;">=</span>
+        <i>V</i><sub style="font-style:normal; font-size:0.7em;">H</sub>
+        <span style="margin:0 6px;">−</span>
+        <i>V</i><sub style="font-style:normal; font-size:0.7em;">L</sub>
+      </span>
+    </div>
+
+    <p style="margin:0 0 14px 0;">
+      — полный размах порогов переключения. Если бы компаратор и ОУ срабатывали
+      мгновенно, период автоколебаний был бы равен
+    </p>
+
+    <div style="text-align:center; margin:16px 0;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.2em;">
+        <i>T</i>
+        <span style="margin:0 8px;">=</span>
+        <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+          <span style="display:block; padding:2px 12px 3px 12px; border-bottom:1.5px solid currentColor;">2<i>ΔV</i></span>
+          <span style="display:block; padding:3px 12px 2px 12px;"><i>SR</i></span>
+        </span>
+      </span>
+    </div>
+
+    <p style="margin:0 0 14px 0;">
+      В реальности задержка компаратора
+      <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+      приводит к тому, что выход ОУ успевает <strong>перелететь</strong> порог.
+      Разберём этот механизм детально — от него зависит правильное понимание
+      коэффициента 4<i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>.
+    </p>
+
+    <!-- Уточнённое объяснение -->
+    <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px; padding:18px 20px; margin:22px 0;">
+
+      <div style="font-size:14px; color:#1e40af; text-transform:uppercase; letter-spacing:1px; font-weight:bold; margin-bottom:12px;">
+        Откуда берётся 4T<sub style="font-style:normal; font-size:0.75em;">d</sub>: механизм перелёта
+      </div>
+
+      <p style="margin:0 0 12px 0;">
+        Задержка <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+        срабатывает ровно <strong>один раз за полупериод</strong> — в момент, когда
+        выход ОУ пересекает порог. Однако следствие этой задержки — не «удвоение
+        задержки», а <strong>увеличение реального размаха</strong> треугольного
+        сигнала. Проследим за выходом:
+      </p>
+
+      <ol style="margin:0 0 12px 0; padding-left:22px;">
+        <li style="margin-bottom:8px;">
+          Выход ОУ движется вверх со скоростью
+          <i style="font-family:Georgia, serif;">SR</i> и в момент
+          <i style="font-family:Georgia, serif;">t</i> = 0 пересекает порог
+          <i style="font-family:Georgia, serif;">V</i><sub style="font-style:normal;">H</sub>.
+        </li>
+        <li style="margin-bottom:8px;">
+          Компаратор срабатывает не сразу, а через
+          <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>.
+          Всё это время выход продолжает идти вверх и успевает «вылететь» за порог на
+          <br>
+          <span style="font-family:Georgia, serif; font-size:1.05em;">δ<i>V</i> = <i>SR</i> · <i>T</i><sub style="font-style:normal; font-size:0.7em;">d</sub>.</span>
+        </li>
+        <li style="margin-bottom:8px;">
+          Через <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+          компаратор переключается, и ОУ начинает двигаться вниз. Ему теперь нужно
+          пройти не <i style="font-family:Georgia, serif;">ΔV</i>, а больше — до нижнего
+          порога <i style="font-family:Georgia, serif;">V</i><sub style="font-style:normal;">L</sub>,
+          плюс ещё один перелёт вниз на такую же величину δ<i style="font-family:Georgia, serif;">V</i>
+          в конце спуска.
+        </li>
+        <li>
+          Такая же картина повторяется на нижнем пороге
+          <i style="font-family:Georgia, serif;">V</i><sub style="font-style:normal;">L</sub>.
+        </li>
+      </ol>
+
+      <p style="margin:0 0 8px 0;">
+        Итого реальный размах «треугольника» от пика до пика:
+      </p>
+
+      <div style="text-align:center; margin:12px 0; padding:10px; background:#ffffff; border-radius:6px;">
+        <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.1em;">
+          <i>ΔV</i><sub style="font-style:normal; font-size:0.7em;">реал</sub>
+          <span style="margin:0 6px;">=</span>
+          <i>ΔV</i>
+          <span style="margin:0 6px;">+</span>
+          2 · <i>SR</i> · <i>T</i><sub style="font-style:normal; font-size:0.7em;">d</sub>
+        </span>
+      </div>
+
+      <p style="margin:0 0 8px 0;">
+        ОУ проходит этот увеличенный размах вверх и вниз с одной и той же скоростью
+        <i style="font-family:Georgia, serif;">SR</i>, поэтому полный период равен
+      </p>
+
+      <div style="text-align:center; margin:14px 0; padding:14px; background:#dbeafe; border:2px solid #2563eb; border-radius:10px;">
+        <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.3em;">
+          <i>T</i>
+          <span style="margin:0 8px;">=</span>
+          2 ·
+          <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+            <span style="display:block; padding:2px 12px 3px 12px; border-bottom:2px solid currentColor;"><i>ΔV</i><sub style="font-style:normal; font-size:0.65em;">реал</sub></span>
+            <span style="display:block; padding:3px 12px 2px 12px;"><i>SR</i></span>
+          </span>
+          <span style="margin:0 8px;">=</span>
+          <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+            <span style="display:block; padding:2px 12px 3px 12px; border-bottom:2px solid currentColor;">2<i>ΔV</i></span>
+            <span style="display:block; padding:3px 12px 2px 12px;"><i>SR</i></span>
+          </span>
+          <span style="margin:0 8px;">+</span>
+          4<i>T</i><sub style="font-style:normal; font-size:0.7em;">d</sub>
+        </span>
+      </div>
+
+      <p style="margin:0; font-size:14px; color:#1e3a8a;">
+        <strong>Ключевой момент.</strong> Задержка
+        <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+        физически наступает один раз за полупериод. Но перелёт
+        δ<i style="font-family:Georgia, serif;">V</i> = <i style="font-family:Georgia, serif;">SR</i> · <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+        возникает на обоих порогах (сверху и снизу), увеличивая эффективный размах
+        на 2·<i style="font-family:Georgia, serif;">SR</i> · <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>.
+        Это добавляет ровно <strong>2<i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+        к каждому полупериоду</strong> и <strong>4<i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+        к полному периоду</strong>. Формула 4<i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+        верна, но её происхождение — перелёт, а не «удвоение задержки».
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ==================== 3. ДВУХТОЧЕЧНОЕ ИСКЛЮЧЕНИЕ ==================== -->
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:21px; color:#1e3a8a; margin:0 0 14px 0; padding-left:10px; border-left:4px solid #2563eb;">
+      3. Двухточечное исключение задержки
+    </h2>
+
+    <p style="margin:0 0 14px 0;">Метод использует два измерения с разными размахами порогов.</p>
+
+    <ol style="margin:0 0 16px 0; padding-left:26px;">
+      <li style="margin-bottom:16px;">
+        При размахе
+        <i style="font-family:Georgia, serif;">ΔV</i><sub style="font-style:normal;">1</sub>
+        измеряется период
+        <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">1</sub>:
+        <div style="text-align:center; margin:14px 0;">
+          <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.2em;">
+            <i>T</i><sub style="font-style:normal; font-size:0.7em;">1</sub>
+            <span style="margin:0 8px;">=</span>
+            <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+              <span style="display:block; padding:2px 12px 3px 12px; border-bottom:1.5px solid currentColor;">2<i>ΔV</i><sub style="font-style:normal; font-size:0.7em;">1</sub></span>
+              <span style="display:block; padding:3px 12px 2px 12px;"><i>SR</i></span>
+            </span>
+            <span style="margin:0 8px;">+</span>
+            4<i>T</i><sub style="font-style:normal; font-size:0.7em;">d</sub>
+          </span>
+        </div>
+      </li>
+      <li>
+        При размахе
+        <i style="font-family:Georgia, serif;">ΔV</i><sub style="font-style:normal;">2</sub>
+        измеряется период
+        <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">2</sub>:
+        <div style="text-align:center; margin:14px 0;">
+          <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.2em;">
+            <i>T</i><sub style="font-style:normal; font-size:0.7em;">2</sub>
+            <span style="margin:0 8px;">=</span>
+            <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+              <span style="display:block; padding:2px 12px 3px 12px; border-bottom:1.5px solid currentColor;">2<i>ΔV</i><sub style="font-style:normal; font-size:0.7em;">2</sub></span>
+              <span style="display:block; padding:3px 12px 2px 12px;"><i>SR</i></span>
+            </span>
+            <span style="margin:0 8px;">+</span>
+            4<i>T</i><sub style="font-style:normal; font-size:0.7em;">d</sub>
+          </span>
+        </div>
+      </li>
+    </ol>
+
+    <p style="margin:0 0 14px 0;">Вычитая первое уравнение из второго, получаем</p>
+
+    <div style="text-align:center; margin:22px 0; padding:18px; background:#dbeafe; border:2px solid #2563eb; border-radius:10px;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.35em;">
+        <i>SR</i>
+        <span style="margin:0 8px;">=</span>
+        <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+          <span style="display:block; padding:2px 12px 3px 12px; border-bottom:2px solid currentColor;">2(<i>ΔV</i><sub style="font-style:normal; font-size:0.7em;">2</sub> − <i>ΔV</i><sub style="font-style:normal; font-size:0.7em;">1</sub>)</span>
+          <span style="display:block; padding:3px 12px 2px 12px;"><i>T</i><sub style="font-style:normal; font-size:0.7em;">2</sub> − <i>T</i><sub style="font-style:normal; font-size:0.7em;">1</sub></span>
+        </span>
+      </span>
+    </div>
+
+    <p style="margin:0;">
+      Здесь <i style="font-family:Georgia, serif;">ΔV</i> — полный размах между порогами
+      компаратора. При симметричной уставке и
+      <i style="font-family:Georgia, serif;">ΔV</i> = полуразмах числитель равен
+      4(<i style="font-family:Georgia, serif;">ΔV</i><sub style="font-style:normal;">2</sub> −
+      <i style="font-family:Georgia, serif;">ΔV</i><sub style="font-style:normal;">1</sub>).
+      Смысл <i style="font-family:Georgia, serif;">ΔV</i> нужно оговаривать явно.
+    </p>
+  </section>
+
+  <!-- ==================== 4. ОБЛАСТЬ ПРИМЕНЕНИЯ ==================== -->
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:21px; color:#1e3a8a; margin:0 0 14px 0; padding-left:10px; border-left:4px solid #2563eb;">
+      4. Область применения и базовые условия корректности
+    </h2>
+
+    <ul style="margin:0; padding-left:24px;">
+      <li style="margin-bottom:8px;">ОУ всё время работает в режиме slew-limited, а не в режиме малого сигнала.</li>
+      <li style="margin-bottom:8px;">Выходное напряжение не ограничивается выходным каскадом по току.</li>
+      <li style="margin-bottom:8px;">Нет фазовой инверсии и превышения дифференциального входного напряжения.</li>
+      <li style="margin-bottom:8px;">Компаратор существенно быстрее ОУ, поэтому <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub> мало и стабильно.</li>
+      <li style="margin-bottom:8px;">Пороги компаратора лежат в линейной зоне выходного напряжения ОУ.</li>
+      <li>Двухточечное вычитание убирает только постоянную аддитивную задержку.</li>
+    </ul>
+
+    <p style="margin:16px 0 0 0; color:#78350f; background:#fef3c7; padding:12px 16px; border-left:4px solid #f59e0b; border-radius:6px;">
+      Ниже — детальный разбор физических причин, из-за которых эти условия могут
+      нарушаться даже при аккуратно собранном стенде, и конкретные способы их
+      нейтрализации.
+    </p>
+  </section>
+
+  <!-- ==================== 5. ОГРАНИЧЕНИЯ ==================== -->
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:21px; color:#1e3a8a; margin:0 0 14px 0; padding-left:10px; border-left:4px solid #2563eb;">
+      5. Детальный разбор ограничений метода
+    </h2>
+
+    <!-- 5.1 Асимметрия SR -->
+    <h3 style="font-size:17px; color:#1e40af; margin:24px 0 10px 0;">
+      5.1. Асимметрия скорости нарастания: <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub> и <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub>
+    </h3>
+
+    <p style="margin:0 0 12px 0;">
+      Реальные ОУ почти всегда имеют разную скорость нарастания при движении выхода
+      «вверх» и «вниз» — из-за разной топологии и ёмкостей P-канальных и N-канальных
+      транзисторов.
+    </p>
+
+    <p style="margin:0 0 12px 0;">
+      <strong>Физика.</strong> Половину периода выход идёт вверх со скоростью
+      <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub>,
+      а вторую половину — вниз со скоростью
+      <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub>.
+      Без учёта задержек:
+    </p>
+
+    <div style="text-align:center; margin:14px 0; padding:12px; background:#f1f5f9; border-radius:8px;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.1em;">
+        <i>T</i> <span style="margin:0 6px;">=</span>
+        <i>t</i><sub style="font-style:normal; font-size:0.7em;">1</sub>
+        <span style="margin:0 6px;">+</span>
+        <i>t</i><sub style="font-style:normal; font-size:0.7em;">2</sub>
+        <span style="margin:0 6px;">=</span>
+        <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+          <span style="display:block; padding:2px 10px 3px 10px; border-bottom:1.5px solid currentColor;"><i>ΔV</i></span>
+          <span style="display:block; padding:3px 10px 2px 10px;"><i>SR</i><sub style="font-style:normal; font-size:0.7em;">+</sub></span>
+        </span>
+        <span style="margin:0 6px;">+</span>
+        <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+          <span style="display:block; padding:2px 10px 3px 10px; border-bottom:1.5px solid currentColor;"><i>ΔV</i></span>
+          <span style="display:block; padding:3px 10px 2px 10px;"><i>SR</i><sub style="font-style:normal; font-size:0.7em;">−</sub></span>
+        </span>
+      </span>
+    </div>
+
+    <p style="margin:12px 0;">
+      Двухточечный метод даст не среднее арифметическое, а <strong>среднее
+      гармоническое</strong>:
+    </p>
+
+    <div style="text-align:center; margin:18px 0; padding:16px; background:#fef2f2; border:2px solid #ef4444; border-radius:10px;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.2em;">
+        <i>SR</i><sub style="font-style:normal; font-size:0.7em;">изм</sub>
+        <span style="margin:0 8px;">=</span>
+        <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+          <span style="display:block; padding:2px 10px 3px 10px; border-bottom:1.5px solid currentColor;">2 · <i>SR</i><sub style="font-style:normal; font-size:0.65em;">+</sub> · <i>SR</i><sub style="font-style:normal; font-size:0.65em;">−</sub></span>
+          <span style="display:block; padding:3px 10px 2px 10px;"><i>SR</i><sub style="font-style:normal; font-size:0.65em;">+</sub> + <i>SR</i><sub style="font-style:normal; font-size:0.65em;">−</sub></span>
+        </span>
+      </span>
+    </div>
+
+    <div style="background:#fef3c7; border-left:4px solid #f59e0b; padding:14px 18px; border-radius:6px;">
+      <span style="color:#78350f;">
+        <strong>Пример.</strong> Если <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub> = 10 В/мкс,
+        а <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub> = 2 В/мкс,
+        прибор покажет 3.33 В/мкс, а не 6 В/мкс.
+      </span>
+    </div>
+
+    <!-- Решение -->
+    <div style="background:#ecfdf5; border:1px solid #86efac; border-radius:10px; padding:16px 20px; margin-top:18px;">
+      <div style="font-size:14px; color:#065f46; text-transform:uppercase; letter-spacing:1px; font-weight:bold; margin-bottom:10px;">
+        Решение: разделение <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub> и <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub> по скважности
+      </div>
+
+      <p style="margin:0 0 12px 0;">
+        Метод не обязательно оставляет инженера «один на один» с гармоническим
+        средним. Измерив <strong>скважность</strong> импульсов на выходе компаратора
+        (отношение времени движения вверх к полному периоду)
+      </p>
+
+      <div style="text-align:center; margin:12px 0; padding:10px; background:#ffffff; border-radius:6px;">
+        <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.15em;">
+          <i>D</i> <span style="margin:0 6px;">=</span>
+          <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+            <span style="display:block; padding:2px 10px 3px 10px; border-bottom:1.5px solid currentColor;"><i>t</i><sub style="font-style:normal; font-size:0.7em;">↑</sub></span>
+            <span style="display:block; padding:3px 10px 2px 10px;"><i>t</i><sub style="font-style:normal; font-size:0.7em;">↑</sub> + <i>t</i><sub style="font-style:normal; font-size:0.7em;">↓</sub></span>
+          </span>
+        </span>
+      </div>
+
+      <p style="margin:12px 0;">
+        и зная измеренное гармоническое среднее
+        <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">изм</sub>,
+        можно аналитически восстановить обе «паспортные» скорости:
+      </p>
+
+      <div style="text-align:center; margin:18px 0; padding:16px; background:#ffffff; border:2px solid #10b981; border-radius:10px;">
+        <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.25em;">
+          <i>SR</i><sub style="font-style:normal; font-size:0.7em;">+</sub>
+          <span style="margin:0 8px;">=</span>
+          <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+            <span style="display:block; padding:2px 10px 3px 10px; border-bottom:2px solid currentColor;"><i>SR</i><sub style="font-style:normal; font-size:0.65em;">изм</sub></span>
+            <span style="display:block; padding:3px 10px 2px 10px;">2<i>D</i></span>
+          </span>
+          <span style="margin:0 22px; color:#94a3b8;">,</span>
+          <i>SR</i><sub style="font-style:normal; font-size:0.7em;">−</sub>
+          <span style="margin:0 8px;">=</span>
+          <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+            <span style="display:block; padding:2px 10px 3px 10px; border-bottom:2px solid currentColor;"><i>SR</i><sub style="font-style:normal; font-size:0.65em;">изм</sub></span>
+            <span style="display:block; padding:3px 10px 2px 10px;">2(1 − <i>D</i>)</span>
+          </span>
+        </span>
+      </div>
+
+      <p style="margin:12px 0 0 0; font-size:14px; color:#065f46;">
+        <strong>Проверка на примере.</strong>
+        <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub> = 10, <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub> = 2.
+        Тогда <i style="font-family:Georgia, serif;">t</i><sub style="font-style:normal;">↑</sub> ∝ 1/10,
+        <i style="font-family:Georgia, serif;">t</i><sub style="font-style:normal;">↓</sub> ∝ 1/2,
+        скважность <i style="font-family:Georgia, serif;">D</i> = (1/10)/(1/10 + 1/2) = 1/6.
+        Формула даёт
+        <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub> = 3.33/(2·1/6) = 10 ✓,
+        <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub> = 3.33/(2·5/6) = 2 ✓.
+      </p>
+
+      <p style="margin:10px 0 0 0; font-size:13.5px; color:#065f46; font-style:italic;">
+        Это копеечное программное дополнение для микроконтроллера: один таймер
+        меряет полный период, второй — время высокого уровня на выходе компаратора.
+        Никаких изменений в аналоговой части не требуется.
+      </p>
+    </div>
+
+    <!-- 5.2 Overdrive dispersion -->
+    <h3 style="font-size:17px; color:#1e40af; margin:28px 0 10px 0;">
+      5.2. Overdrive dispersion: зависимость <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub> от крутизны сигнала
+    </h3>
+
+    <p style="margin:0 0 12px 0;">
+      Быстродействие компаратора зависит от <em>overdrive</em> — насколько входной
+      сигнал превышает порог. При ramp-входе эффективная задержка имеет вид
+    </p>
+
+    <div style="text-align:center; margin:14px 0; padding:12px; background:#f1f5f9; border-radius:8px;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.05em;">
+        <i>T</i><sub style="font-style:normal; font-size:0.7em;">d,eff</sub>
+        <span style="margin:0 6px;">≈</span>
+        <i>T</i><sub style="font-style:normal; font-size:0.7em;">pd</sub>(OD)
+        <span style="margin:0 6px;">+</span>
+        <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+          <span style="display:block; padding:2px 10px 3px 10px; border-bottom:1.5px solid currentColor;">OD<sub style="font-style:normal; font-size:0.7em;">порог</sub></span>
+          <span style="display:block; padding:3px 10px 2px 10px;"><i>SR</i></span>
+        </span>
+      </span>
+    </div>
+
+    <p style="margin:12px 0;">
+      При строго постоянном <i style="font-family:Georgia, serif;">SR(V)</i> задержки
+      <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d1</sub>
+      и <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d2</sub>
+      совпадают, и член 4<i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+      при вычитании сокращается. Остаточная ошибка появляется при
+      <strong>непостоянстве <i style="font-family:Georgia, serif;">SR</i> по амплитуде</strong>:
+      нелинейность у краёв диапазона, просадки питания, тепловой дрейф. Тогда
+      <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d2</sub> ≠
+      <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d1</sub>,
+      и остаточная ошибка 4(<i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d2</sub> −
+      <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d1</sub>)
+      подмешивается к измеренному <i style="font-family:Georgia, serif;">SR</i>.
+    </p>
+
+    <!-- 5.3 Current-limited + верхний предел -->
+    <h3 style="font-size:17px; color:#1e40af; margin:28px 0 10px 0;">
+      5.3. Ограничение по выходному току: slew-limited vs current-limited
+    </h3>
+
+    <p style="margin:0 0 12px 0;">
+      Ёмкость входа компаратора, паразитная ёмкость дорожек и входная ёмкость щупов
+      образуют нагрузку
+      <i style="font-family:Georgia, serif;">C</i><sub style="font-style:normal;">нагр</sub>.
+      Чтобы выход нарастал со скоростью <i style="font-family:Georgia, serif;">SR</i>,
+      ОУ должен отдавать ток
+    </p>
+
+    <div style="text-align:center; margin:14px 0; padding:12px; background:#f1f5f9; border-radius:8px;">
+      <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.15em;">
+        <i>I</i><sub style="font-style:normal; font-size:0.7em;">вых</sub>
+        <span style="margin:0 6px;">=</span>
+        <i>C</i><sub style="font-style:normal; font-size:0.7em;">нагр</sub>
+        <span style="margin:0 4px;">·</span>
+        <i>SR</i>
+      </span>
+    </div>
+
+    <p style="margin:12px 0;">
+      <strong>Критерий сбоя.</strong> При
+      <i style="font-family:Georgia, serif;">SR</i> = 50 В/мкс и
+      <i style="font-family:Georgia, serif;">C</i><sub style="font-style:normal;">нагр</sub> = 30 пФ
+      требуется
+      <i style="font-family:Georgia, serif;">I</i><sub style="font-style:normal;">вых</sub> = 1.5 мА.
+      Если выходной каскад ограничен 1 мА, ОУ уйдёт в режим ограничения по току,
+      а не по скорости нарастания.
+    </p>
+
+    <!-- Верхний предел -->
+    <div style="background:#fef2f2; border:1px solid #fca5a5; border-radius:10px; padding:16px 20px; margin-top:16px;">
+      <div style="font-size:14px; color:#991b1b; text-transform:uppercase; letter-spacing:1px; font-weight:bold; margin-bottom:10px;">
+        Слепая зона метода: верхний предел по быстродействию
+      </div>
+
+      <p style="margin:0 0 12px 0;">
+        Даже у лучших компараторов входная ёмкость составляет 2–3 пФ, а ёмкость
+        коротких дорожек платы — ещё 2–5 пФ. Суммарно это 5–8 пФ, которые
+        <strong>невозможно убрать</strong>. При этом:
+      </p>
+
+      <div style="text-align:center; margin:12px 0; padding:10px; background:#ffffff; border-radius:6px;">
+        <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.05em;">
+          <i>I</i><sub style="font-style:normal; font-size:0.7em;">вых,min</sub>
+          <span style="margin:0 6px;">=</span>
+          8 пФ · <i>SR</i>
+        </span>
+      </div>
+
+      <p style="margin:12px 0;">
+        Для <i style="font-family:Georgia, serif;">SR</i> = 100 В/мкс это уже 0.8 мА
+        только на перезаряд паразитной ёмкости, без учёта полезной нагрузки. Плюс
+        обратный ток через защитные диоды ОУ, плюс заряд выходной ёмкости самого
+        ОУ. Для большинства High-Speed ОУ с <i style="font-family:Georgia, serif;">SR</i>
+        > 50 В/мкс метод становится практически неприменим — измеряется не
+        внутренний <i style="font-family:Georgia, serif;">SR</i>, а произведение
+        «ёмкость платы × выходной ток».
+      </p>
+
+      <p style="margin:12px 0 0 0; padding:10px 14px; background:#ffffff; border-left:3px solid #dc2626; border-radius:4px; color:#7f1d1d; font-size:14px;">
+        <strong>Рекомендация к выводам.</strong> Метод оптимален для низкочастотных
+        и среднечастотных ОУ (до 20–30 В/мкс). Для сверхбыстрых High-Speed ОУ
+        (> 50 В/мкс) он даёт систематически заниженный результат, и пользоваться
+        им следует только с оговоркой о паразитной ёмкости стенда.
+      </p>
+    </div>
+
+    <!-- 5.4 Phase reversal + snubber -->
+    <h3 style="font-size:17px; color:#1e40af; margin:28px 0 10px 0;">
+      5.4. Дифференциальный вход и phase reversal
+    </h3>
+
+    <p style="margin:0 0 12px 0;">
+      В автогенераторе компаратор переключается мгновенно (относительно ОУ) и
+      инвертирует сигнал на входе. На дифференциальном входе ОУ возникает скачок,
+      равный полному размаху выхода компаратора.
+    </p>
+
+    <ul style="margin:0 0 12px 0; padding-left:24px;">
+      <li style="margin-bottom:6px;">
+        у ОУ с биполярным входом без защитных диодов — пробой перехода база-эмиттер,
+        необратимо ухудшающий шум и смещение;
+      </li>
+      <li style="margin-bottom:6px;">
+        если защитные диоды есть, через них течёт большой входной ток, который
+        заряжает ёмкости напрямую из цепи компаратора, минуя внутренний каскад;
+      </li>
+      <li>
+        у ОУ, подверженных инверсии фазы (phase reversal), при превышении синфазного
+        диапазона выход резко падает в противоположное состояние — генератор
+        «защёлкивается», генерация срывается.
+      </li>
+    </ul>
+
+    <!-- Схемотехническое решение -->
+    <div style="background:#ecfdf5; border:1px solid #86efac; border-radius:10px; padding:16px 20px; margin-top:16px;">
+      <div style="font-size:14px; color:#065f46; text-transform:uppercase; letter-spacing:1px; font-weight:bold; margin-bottom:10px;">
+        Схемотехническое решение: резистор с ускоряющим конденсатором
+      </div>
+
+      <p style="margin:0 0 12px 0;">
+        Наивное решение — поставить последовательный резистор
+        <i style="font-family:Georgia, serif;">R</i><sub style="font-style:normal;">з</sub>
+        на входе ОУ — <strong>не работает</strong>. Этот резистор вместе с входной
+        ёмкостью ОУ
+        <i style="font-family:Georgia, serif;">C</i><sub style="font-style:normal;">вх</sub>
+        образует RC-фильтр, который завалит фронт входного сигнала:
+      </p>
+
+      <div style="text-align:center; margin:12px 0; padding:10px; background:#ffffff; border-radius:6px;">
+        <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.05em;">
+          <i>f</i><sub style="font-style:normal; font-size:0.7em;">−3дБ</sub>
+          <span style="margin:0 6px;">=</span>
+          <span style="display:inline-block; vertical-align:middle; text-align:center; line-height:1.15; margin:0 3px;">
+            <span style="display:block; padding:2px 10px 3px 10px; border-bottom:1.5px solid currentColor;">1</span>
+            <span style="display:block; padding:3px 10px 2px 10px;">2π · <i>R</i><sub style="font-style:normal; font-size:0.7em;">з</sub> · <i>C</i><sub style="font-style:normal; font-size:0.7em;">вх</sub></span>
+          </span>
+        </span>
+      </div>
+
+      <p style="margin:12px 0;">
+        При <i style="font-family:Georgia, serif;">R</i><sub style="font-style:normal;">з</sub> = 100 Ом
+        и <i style="font-family:Georgia, serif;">C</i><sub style="font-style:normal;">вх</sub> = 3 пФ
+        получается <i style="font-family:Georgia, serif;">f</i><sub style="font-style:normal;">−3дБ</sub> ≈ 530 МГц.
+        Формально много, но <strong>постоянная времени</strong> τ = 0.3 нс уже
+        сравнима с фронтом переключения, и ОУ выйдет из режима динамического
+        перегруза (slew-limited) в режим малого сигнала — метод начнёт измерять
+        не <i style="font-family:Georgia, serif;">SR</i>, а полосу.
+      </p>
+
+      <p style="margin:12px 0;">
+        <strong>Правильное решение.</strong> Резистор
+        <i style="font-family:Georgia, serif;">R</i><sub style="font-style:normal;">з</sub>
+        обязательно шунтируется небольшой ёмкостью — «ускоряющим конденсатором»
+        <i style="font-family:Georgia, serif;">C</i><sub style="font-style:normal;">уск</sub>
+        десятки пикофарад:
+      </p>
+
+      <div style="background:#ffffff; border:1px solid #86efac; border-radius:8px; padding:12px 14px; margin:12px 0; font-family:'Consolas', monospace; font-size:13.5px; color:#065f46; line-height:1.7;">
+        <div>Компаратор ───[R_з]───┬──── вход ОУ</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[C_уск]</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┴── земля ОУ</div>
+      </div>
+
+      <p style="margin:12px 0 0 0; font-size:14px; color:#065f46;">
+        На быстрых фронтах конденсатор работает как короткое замыкание: сигнал
+        проходит напрямую, минуя резистор. Резистор при этом продолжает
+        ограничивать <strong>постоянный</strong> ток через защитные диоды.
+        Итог: динамический удар по входу ограничен, фронт сигнала сохранён,
+        ОУ остаётся в режиме slew-limited.
+      </p>
+    </div>
+
+    <!-- 5.5 Jitter -->
+    <h3 style="font-size:17px; color:#1e40af; margin:28px 0 10px 0;">
+      5.5. Джиттер и время восстановления компаратора
+    </h3>
+
+    <p style="margin:0 0 12px 0;">
+      Даже при постоянном <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>
+      в среднем у него есть случайная составляющая. Двухточечное вычитание убирает
+      систематическую часть, но не дисперсию. На коротких периодах относительный
+      вклад джиттера растёт, и разность
+      <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">2</sub> −
+      <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">1</sub>
+      «плывёт» от измерения к измерению.
+    </p>
+
+    <p style="margin:0; font-size:14px; color:#52606d;">
+      Отдельная причина неравенства задержек — время восстановления после глубокого
+      насыщения компаратора. Оно тоже зависит от амплитуды перегрузки и не
+      сокращается при вычитании.
+    </p>
+  </section>
+
+  <!-- ==================== 6. БОРЬБА ==================== -->
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:21px; color:#1e3a8a; margin:0 0 14px 0; padding-left:10px; border-left:4px solid #2563eb;">
+      6. Как с этим бороться при проектировании стенда
+    </h2>
+
+    <ul style="margin:0; padding-left:24px;">
+      <li style="margin-bottom:8px;">
+        Выбирать компаратор с задержкой 2–5 нс — на два порядка меньше времени
+        нарастания ОУ, чтобы минимизировать вклад
+        4<i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">d</sub>.
+      </li>
+      <li style="margin-bottom:8px;">
+        Минимизировать длину дорожек между выходом ОУ и входом компаратора.
+      </li>
+      <li style="margin-bottom:8px;">
+        Защищать дифференциальный вход ОУ <strong>резистором с ускоряющим
+        конденсатором</strong> (см. 5.4), а не «голым» резистором.
+      </li>
+      <li style="margin-bottom:8px;">
+        Ввести в микроконтроллер измерение <strong>скважности</strong> и разделение
+        <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub>
+        и <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub>
+        по формулам из 5.1.
+      </li>
+      <li style="margin-bottom:8px;">
+        Провести несколько измерений
+        <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">2</sub> −
+        <i style="font-family:Georgia, serif;">T</i><sub style="font-style:normal;">1</sub>
+        для оценки джиттера и разброса.
+      </li>
+      <li>
+        Ограничить применимость метода диапазоном до 20–30 В/мкс; для High-Speed ОУ
+        результат интерпретировать только с учётом паразитной ёмкости стенда.
+      </li>
+    </ul>
+  </section>
+
+  <!-- ==================== 7. ПРИМЕНЕНИЕ ==================== -->
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:21px; color:#1e3a8a; margin:0 0 14px 0; padding-left:10px; border-left:4px solid #2563eb;">
+      7. Практическое применение: патенты и публикации
+    </h2>
+
+    <p style="margin:0 0 16px 0;">
+      Метод имеет реальное применение, хотя и не является массовым. Готовых
+      коммерческих измерителей <i style="font-family:Georgia, serif;">SR</i>
+      на этом принципе не найдено, но сама идея — двухточечное вычитание задержки
+      через разницу периодов — встречается в патентах и научных работах.
+    </p>
+
+    <h3 style="font-size:17px; color:#1e40af; margin:22px 0 10px 0;">
+      7.1. Патент US7548822B2 (IBM, 2009)
+    </h3>
+    <p style="margin:0 0 12px 0;">
+      Устройство определения скорости нарастания в ИС путём сравнения сигнала с
+      двумя опорными напряжениями. Схема: два компаратора, XOR, интегратор.
+      Классический двухточечный принцип в кремнии.
+    </p>
+
+    <h3 style="font-size:17px; color:#1e40af; margin:22px 0 10px 0;">
+      7.2. Японский патент JPS62247211A (1987)
+    </h3>
+    <p style="margin:0 0 12px 0;">
+      Ёмкостный преобразователь на основе релаксационного генератора с ОУ. Прямо
+      используется разница периодов автоколебаний при разных параметрах цепи для
+      вычисления задержки, обусловленной конечным
+      <i style="font-family:Georgia, serif;">SR</i>. Та же математика, что и в
+      двухточечном методе.
+    </p>
+
+    <h3 style="font-size:17px; color:#1e40af; margin:22px 0 10px 0;">
+      7.3. Венгерский патент 177430 (1978)
+    </h3>
+    <p style="margin:0 0 12px 0;">
+      Вероятно, самое раннее известное применение. Автор критикует классический
+      осциллографический метод и предлагает измерение через параметры автогенерации.
+      Отдельно подчёркнута проблема асимметрии
+      <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub>
+      и <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub>.
+    </p>
+
+    <h3 style="font-size:17px; color:#1e40af; margin:22px 0 10px 0;">
+      7.4. Научные работы и on-chip testing
+    </h3>
+    <p style="margin:0;">
+      Работы по анализу релаксационных генераторов с учётом GBW, <i style="font-family:Georgia, serif;">SR</i>
+      и задержки компаратора (Watanabe et al., IEEE TIM, 2000), а также работы
+      1993 года по встроенному измерению GBW и <i style="font-family:Georgia, serif;">SR</i>
+      прямо на кристалле (LM741). В этих задачах простота схемы важнее абсолютной
+      точности, и двухточечный принцип оказывается востребован.
+    </p>
+
+    <div style="background:#eef2ff; border-left:4px solid #6366f1; padding:16px 20px; border-radius:8px; margin-top:22px;">
+      <strong style="color:#3730a3; display:block; margin-bottom:8px;">Резюме</strong>
+      <ul style="margin:0; padding-left:22px; color:#3730a3;">
+        <li style="margin-bottom:6px;">Запатентован минимум трижды (США, Япония, Венгрия).</li>
+        <li style="margin-bottom:6px;">Используется в научных исследованиях релаксационных генераторов.</li>
+        <li style="margin-bottom:6px;">Применяется в on-chip тестировании.</li>
+        <li>Коммерческих измерителей на этом принципе не найдено; в промышленности доминирует классический метод со ступенькой и АЦП.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== 8. ИНТЕРАКТИВ ==================== -->
+  <section style="margin-bottom:36px;">
+    <h2 style="font-size:21px; color:#1e3a8a; margin:0 0 14px 0; padding-left:10px; border-left:4px solid #2563eb;">
+      8. Интерактив: асимметрия <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">+</sub> / <i style="font-family:Georgia, serif;">SR</i><sub style="font-style:normal;">−</sub> и разделение по скважности
+    </h2>
+
+    <p style="margin:0 0 14px 0;">
+      Двигайте слайдеры, задавая реальные скорости нарастания вверх и вниз.
+      Двухточечный метод видит только полный период, поэтому вычисляет
+      <strong>среднее гармоническое</strong>. Но по скважности
+      <i style="font-family:Georgia, serif;">D</i> обе исходные скорости восстанавливаются
+      точно — формулы в разделе 5.1.
+    </p>
+
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px; height:440px; box-sizing:border-box; display:flex; gap:16px;">
+
+      <div style="flex:0 0 240px; display:flex; flex-direction:column; justify-content:center; gap:14px;">
+
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;">
+            <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.05em; color:#065f46;">
+              <i>SR</i><sub style="font-style:normal; font-size:0.7em;">+</sub>
+              <span style="font-family:'Segoe UI', sans-serif; font-style:normal; color:#52606d; font-size:0.85em; margin-left:6px;">
+                (вверх)
+              </span>
+            </span>
+            <strong id="lblSRp" style="color:#059669; font-size:1.05em;">10.0 В/мкс</strong>
+          </div>
+          <input id="cSRp" type="range" min="1" max="50" step="0.5" value="10"
+                 style="width:100%; accent-color:#059669; cursor:pointer;">
+        </div>
+
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;">
+            <span style="font-family:Georgia, 'Times New Roman', serif; font-size:1.05em; color:#b91c1c;">
+              <i>SR</i><sub style="font-style:normal; font-size:0.7em;">−</sub>
+              <span style="font-family:'Segoe UI', sans-serif; font-style:normal; color:#52606d; font-size:0.85em; margin-left:6px;">
+                (вниз)
+              </span>
+            </span>
+            <strong id="lblSRn" style="color:#dc2626; font-size:1.05em;">2.0 В/мкс</strong>
+          </div>
+          <input id="cSRn" type="range" min="1" max="50" step="0.5" value="2"
+                 style="width:100%; accent-color:#dc2626; cursor:pointer;">
+        </div>
+
+        <div style="background:#eef2ff; border-left:3px solid #6366f1; padding:10px 12px; border-radius:6px; font-size:12.5px; color:#3730a3; line-height:1.5;">
+          <strong>Скважность <i style="font-family:Georgia, serif;">D</i></strong> — это
+          <i style="font-family:Georgia, serif;">t</i><sub style="font-style:normal;">↑</sub> / <i style="font-family:Georgia, serif;">T</i>.
+          Один таймер микроконтроллера — и обе скорости разделены.
+        </div>
+
+      </div>
+
+      <div style="flex:1; display:flex; flex-direction:column; gap:10px; min-width:0;">
+
+        <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:8px; padding:6px; flex:1 1 auto; min-height:0; position:relative;">
+          <div id="cSvgBox" style="width:100%; height:100%;"></div>
+        </div>
+
+        <div style="display:flex; gap:8px;">
+          <div style="flex:1; background:#ecfdf5; border:1.5px solid #10b981; border-radius:8px; padding:8px 10px; text-align:center;">
+            <div style="font-size:10.5px; color:#065f46; text-transform:uppercase; letter-spacing:0.5px;">SR<sub style="font-style:normal;">изм</sub> (гарм.)</div>
+            <div style="font-family:Georgia, serif; font-size:1.2em; color:#065f46; font-weight:bold; line-height:1.2;">
+              <span id="cHarm">3.33</span>
+              <span style="font-size:0.55em; font-family:'Segoe UI', sans-serif; font-weight:normal;">В/мкс</span>
+            </div>
+          </div>
+
+          <div style="flex:1; background:#eef2ff; border:1.5px solid #6366f1; border-radius:8px; padding:8px 10px; text-align:center;">
+            <div style="font-size:10.5px; color:#3730a3; text-transform:uppercase; letter-spacing:0.5px;">SR<sub style="font-style:normal;">+</sub> по D</div>
+            <div style="font-family:Georgia, serif; font-size:1.2em; color:#3730a3; font-weight:bold; line-height:1.2;">
+              <span id="cSRpCalc">10.0</span>
+              <span style="font-size:0.55em; font-family:'Segoe UI', sans-serif; font-weight:normal;">В/мкс</span>
+            </div>
+          </div>
+
+          <div style="flex:1; background:#eef2ff; border:1.5px solid #6366f1; border-radius:8px; padding:8px 10px; text-align:center;">
+            <div style="font-size:10.5px; color:#3730a3; text-transform:uppercase; letter-spacing:0.5px;">SR<sub style="font-style:normal;">−</sub> по D</div>
+            <div style="font-family:Georgia, serif; font-size:1.2em; color:#3730a3; font-weight:bold; line-height:1.2;">
+              <span id="cSRnCalc">2.0</span>
+              <span style="font-size:0.55em; font-family:'Segoe UI', sans-serif; font-weight:normal;">В/мкс</span>
+            </div>
+          </div>
+
+          <div style="flex:0 0 90px; background:#fff7ed; border:1.5px solid #f59e0b; border-radius:8px; padding:8px 10px; text-align:center;">
+            <div style="font-size:10.5px; color:#9a3412; text-transform:uppercase; letter-spacing:0.5px;">D</div>
+            <div style="font-family:Georgia, serif; font-size:1.2em; color:#9a3412; font-weight:bold; line-height:1.2;">
+              <span id="cDuty">17</span>
+              <span style="font-size:0.55em; font-family:'Segoe UI', sans-serif; font-weight:normal;">%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var sSRp = document.getElementById('cSRp');
+  var sSRn = document.getElementById('cSRn');
+
+  var lblSRp = document.getElementById('lblSRp');
+  var lblSRn = document.getElementById('lblSRn');
+
+  var cHarm    = document.getElementById('cHarm');
+  var cDuty    = document.getElementById('cDuty');
+  var cSRpCalc = document.getElementById('cSRpCalc');
+  var cSRnCalc = document.getElementById('cSRnCalc');
+  var cSvgBox  = document.getElementById('cSvgBox');
+
+  var VMAX = 2;
+
+  function drawWave(SRp, SRn) {
+    var W = 480, H = 220;
+    var padL = 42, padR = 16, padT = 22, padB = 38;
+    var plotW = W - padL - padR;
+    var plotH = H - padT - padB;
+
+    var tp = VMAX / SRp;
+    var tn = VMAX / SRn;
+    var T = tp + tn;
+
+    var x0 = padL;
+    var x1 = padL + (tp / T) * plotW;
+    var x2 = padL + plotW;
+    var yBot = padT + plotH;
+    var yTop = padT;
+
+    var fillUp = 'M ' + x0 + ' ' + yBot + ' L ' + x1 + ' ' + yTop + ' L ' + x1 + ' ' + yBot + ' Z';
+    var fillDn = 'M ' + x1 + ' ' + yTop + ' L ' + x2 + ' ' + yBot + ' L ' + x1 + ' ' + yBot + ' Z';
+
+    var gridH = '';
+    var nH = 4;
+    for (var i = 0; i <= nH; i++) {
+      var yy = padT + (plotH * i) / nH;
+      gridH += '<line x1="' + padL + '" y1="' + yy + '" x2="' + (padL + plotW) + '" y2="' + yy + '" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,4"/>';
+    }
+
+    var yLabels = '';
+    for (var j = 0; j <= nH; j++) {
+      var volt = (VMAX * (nH - j)) / nH;
+      var ypos = padT + (plotH * j) / nH;
+      yLabels += '<text x="' + (padL - 8) + '" y="' + (ypos + 4) + '" font-size="10.5" fill="#64748b" text-anchor="end" font-family="Consolas, monospace">' + volt.toFixed(1) + '</text>';
+    }
+
+    var xLabels =
+      '<text x="' + x0 + '" y="' + (padT + plotH + 22) + '" font-size="10.5" fill="#64748b" text-anchor="middle" font-family="Consolas, monospace">0</text>' +
+      '<text x="' + x1 + '" y="' + (padT + plotH + 22) + '" font-size="10.5" fill="#059669" text-anchor="middle" font-family="Consolas, monospace">t₊</text>' +
+      '<text x="' + x2 + '" y="' + (padT + plotH + 22) + '" font-size="10.5" fill="#dc2626" text-anchor="middle" font-family="Consolas, monospace">t₋</text>';
+
+    var axisLabels =
+      '<text x="14" y="' + (padT + plotH / 2) + '" font-size="11" fill="#475569" text-anchor="middle" transform="rotate(-90 14 ' + (padT + plotH / 2) + ')" font-family="Segoe UI, sans-serif">U, В</text>' +
+      '<text x="' + (padL + plotW / 2) + '" y="' + (H - 6) + '" font-size="11" fill="#475569" text-anchor="middle" font-family="Segoe UI, sans-serif">t</text>';
+
+    var svg =
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" style="width:100%; height:100%; display:block;">' +
+        '<rect x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="#fafbfc"/>' +
+        gridH +
+        '<line x1="' + padL + '" y1="' + (padT + plotH) + '" x2="' + (padL + plotW) + '" y2="' + (padT + plotH) + '" stroke="#94a3b8" stroke-width="1"/>' +
+        '<line x1="' + padL + '" y1="' + padT + '" x2="' + padL + '" y2="' + (padT + plotH) + '" stroke="#94a3b8" stroke-width="1"/>' +
+        '<path d="' + fillUp + '" fill="#d1fae5" opacity="0.65"/>' +
+        '<path d="' + fillDn + '" fill="#fee2e2" opacity="0.65"/>' +
+        '<polyline points="' + x0 + ',' + yBot + ' ' + x1 + ',' + yTop + ' ' + x2 + ',' + yBot + '" fill="none" stroke="#1e3a8a" stroke-width="2.4" stroke-linejoin="round"/>' +
+        yLabels + xLabels + axisLabels +
+      '</svg>';
+
+    cSvgBox.innerHTML = svg;
+  }
+
+  function update() {
+    var SRp = parseFloat(sSRp.value);
+    var SRn = parseFloat(sSRn.value);
+
+    lblSRp.textContent = SRp.toFixed(1) + ' В/мкс';
+    lblSRn.textContent = SRn.toFixed(1) + ' В/мкс';
+
+    var tp = VMAX / SRp;
+    var tn = VMAX / SRn;
+    var T = tp + tn;
+    var D = tp / T;
+
+    var harm = 2 * SRp * SRn / (SRp + SRn);
+
+    // Восстановление через формулы: SR+ = SRизм / (2D), SR- = SRизм / (2(1-D))
+    var SRpCalc = harm / (2 * D);
+    var SRnCalc = harm / (2 * (1 - D));
+
+    cHarm.textContent    = harm.toFixed(2);
+    cDuty.textContent    = (D * 100).toFixed(0);
+    cSRpCalc.textContent = SRpCalc.toFixed(1);
+    cSRnCalc.textContent = SRnCalc.toFixed(1);
+
+    drawWave(SRp, SRn);
+  }
+
+  sSRp.addEventListener('input', update);
+  sSRn.addEventListener('input', update);
+
+  update();
+})();
+</script>
+
+</article>
