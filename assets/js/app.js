@@ -25,16 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- УПРАВЛЕНИЕ АККОРДЕОНОМ ---
     const categories = document.querySelectorAll('.category-title');
     
-    // 1. Подсвечиваем активную статью в меню (сравниваем текущий URL с href ссылки)
-    const currentPath = window.location.pathname;
+    // 1. Подсвечиваем активную статью в меню
+    const currentPath = decodeURIComponent(window.location.pathname);
     const fileItems = document.querySelectorAll('.file-item');
     
     fileItems.forEach(item => {
         const itemPath = item.getAttribute('href');
-        // Если текущий адрес заканчивается на путь ссылки (например, /opamp/ и content/opamp/)
-        if (currentPath.includes(itemPath)) {
+        // Если текущий адрес заканчивается на путь ссылки
+        if (currentPath.endsWith(itemPath) || currentPath.includes(itemPath)) {
             item.classList.add('active');
-            // Автоматически открываем рубрику, в которой находится эта статья
             const parentList = item.closest('.file-list');
             if (parentList) {
                 parentList.classList.add('show');
